@@ -1,0 +1,61 @@
+<div class="sidebar" [ngClass]="collapsed ? 'sidebar-collapsed' : ''">
+    <div class="menu-btn" (click)="toggleCollapsed()">
+        @if(!collapsed){
+        <mat-icon class="text-white" fontIcon="chevron_right"></mat-icon>
+        } @if(collapsed) {
+        <mat-icon class="text-white" fontIcon="chevron_left"></mat-icon>
+        }
+    </div>
+    <div class="logo-container">
+        <div class="head">
+            <div class="logo">
+                <img [src]="'public/angular.jpeg'" />
+            </div>
+            @if(collapsed){
+            <div class="user-details">
+                <p class="title">taller identity</p>
+                <p class="name">Angular 20</p>
+            </div>
+            }
+        </div>
+        @if(collapsed){
+        <div class="logo-text" @fadeInOut></div>
+        }
+    </div>
+    <div class="scrollwrap scrollwrap_delayed">
+        <ul class="sidebar-nav" @fadeInOut>
+            @for (data of navData; track $index) {
+            <li class="sidebar-nav-item">
+                @if(data.items && data.items.length > 0){
+                <a class="sidebar-nav-link" (click)="handleClick(data)" [ngClass]="getActiveClass(data)">
+                    <mat-icon class="sidebar-link-icon" [fontIcon]="data.icon"></mat-icon>
+                    @if (collapsed) {
+                    <span class="sidebar-link-text" @fadeInOut>
+                        {{ data.label }}
+                    </span>
+                    } @if (data.items && collapsed) {
+                    <mat-icon class="menu-collapse-icon"
+                        [fontIcon]="!data.expanded ? 'chevron_right' : 'expand_more'"></mat-icon>
+                    }
+                </a>
+                } @if(!data.items || (data.items && data.items.length === 0)){
+                <a class="sidebar-nav-link" [routerLink]="[data.route]" routerLinkActive="active"
+                    [routerLinkActiveOptions]="{ exact: true }" (click)="shrinkItems(data)">
+                    <mat-icon class="sidebar-link-icon" [fontIcon]="data.icon"></mat-icon>
+                    @if (collapsed) {
+                    <span class="sidebar-link-text" @fadeInOut>
+                        {{ data.label }}
+                    </span>
+                    }
+                </a>
+                } @if(collapsed && data.items && data.items.length > 0){
+                <div>
+                    <app-sublevel-menu [data]="data" [collapsed]="collapsed" [multiple]="multiple"
+                        [expanded]="data.expanded" />
+                </div>
+                }
+            </li>
+            }
+        </ul>
+    </div>
+</div>

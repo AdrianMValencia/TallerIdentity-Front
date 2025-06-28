@@ -1,0 +1,231 @@
+.sidebar {
+  // background-color: #111727;
+  background-color: #1b1833;
+  transition: all 0.5s ease;
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  width: 5rem;
+  height: 100vh;
+  box-shadow: 0.063rem 0 1.25rem 0 #757575;
+  color: #fafdff;
+  .logo-container {
+    display: flex;
+    align-items: center;
+    padding: 0.938rem 0.938rem 0 0.938rem;
+    width: 100%;
+    .head {
+      display: flex;
+      gap: 20px;
+      padding-bottom: 20px;
+      // border-bottom: 1px solid #fafdff;
+      .logo {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        overflow: hidden;
+        img {
+          width: 100%;
+          object-fit: cover;
+        }
+      }
+      .user-details {
+        .title {
+          font-size: 10px;
+          font-weight: 500;
+          color: #757575;
+          text-transform: uppercase;
+        }
+        .name {
+          font-size: 14px;
+          font-weight: 500;
+        }
+      }
+    }
+    .logo-text {
+      margin-left: 1.5rem;
+      font-size: 24px;
+      font-weight: 700;
+      color: #757575;
+    }
+  }
+}
+
+.menu-btn {
+  position: absolute;
+  right: -14px;
+  top: 3.5%;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  color: #757575;
+  border: 2px solid #fafdff;
+  background-color: #111727;
+  &:hover i {
+    color: #fafdff;
+  }
+}
+
+.sidebar-collapsed {
+  width: 16.5625rem;
+}
+
+.sidebar-nav {
+  list-style: none;
+  padding: 0.938rem;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  cursor: pointer;
+
+  .sidebar-nav-item {
+    width: 100%;
+    margin-bottom: 0.625rem;
+
+    .sidebar-nav-link {
+      display: flex;
+      align-items: center;
+      height: 2.5rem;
+      color: #757575;
+      text-decoration: none;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+
+      .sidebar-link-icon {
+        font-size: 18px;
+        width: 2rem;
+        min-width: 2rem;
+        margin: 0 0.5rem;
+        text-align: center;
+        padding-top: 3px;
+      }
+
+      .sidebar-link-text {
+        margin-right: 0.5rem;
+        font-size: 14px;
+      }
+    }
+
+    .sidebar-nav-link:hover {
+      // background-color: #1a202e;
+      background-color: #302d4c;
+      color: #fafdff;
+
+      .menu-collapse-icon {
+        color: #fafdff;
+      }
+    }
+  }
+
+  // .sidebar-nav-item:hover {
+  //   .sidebar-nav-link {
+  //     background-color: #1a202e;
+  //     color: #fafdff;
+  //   }
+  // }
+}
+.active {
+  background-color: #1a202e;
+
+  .menu-collapse-icon,
+  .sidebar-link-icon,
+  .sidebar-link-text {
+    color: #fafdff;
+  }
+}
+
+.active-sublevel {
+  color: #fafdff !important;
+}
+
+.menu-collapse-icon {
+  font-size: 20px;
+  width: 2rem;
+  min-width: 2rem;
+  margin: auto 0.5rem auto auto;
+  text-align: center;
+  color: #fafdff;
+}
+
+.sublevel-nav {
+  list-style: none;
+  margin-left: 10px;
+  // padding-left: 10px;
+  border-left: 1px solid #252525; //#464545;
+  .sublevel-nav-item {
+    .sublevel-nav-link {
+      display: flex;
+      align-items: center;
+      height: 2.5rem;
+      color: #757575;
+      text-decoration: none;
+      border-radius: 10px; //0.625rem;
+      transition: all 0.3s ease;
+
+      .sublevel-link-icon {
+        font-size: 14px;
+        width: 2rem;
+        min-width: 2rem;
+        margin: 0 0.5rem;
+        text-align: center;
+        padding-top: 5px;
+      }
+
+      .sublevel-link-text {
+        font-size: 12px;
+        margin-left: 0.8rem;
+      }
+    }
+
+    .sublevel-nav-link:hover {
+      color: #fafdff;
+    }
+  }
+}
+
+//scrollbar and visibility on hover and focus
+
+.scrollwrap {
+  overflow-y: auto;
+  visibility: hidden;
+  height: calc(100% - 3.65rem);
+}
+
+.sidebar-nav,
+.scrollwrap:hover,
+.scrollwrap:focus {
+  visibility: visible;
+}
+
+.scrollwrap_delayed {
+  transition: visibility 0.5s 0.2s;
+}
+
+.scrollwrap_delayed:hover {
+  transition: visibility 0.2s 0.2s;
+}
+
+// works on chrome, edge and safari
+.scrollwrap::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scrollwrap::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.scrollwrap::-webkit-scrollbar-thumb {
+  background-color: #454d61;
+  border-radius: 20px;
+}
+
+// works on firefox
+.scrollwrap {
+  scrollbar-width: thin;
+  scrollbar-color: #454d61 transparent;
+}

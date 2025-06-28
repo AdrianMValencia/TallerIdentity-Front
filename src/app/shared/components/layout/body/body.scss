@@ -1,0 +1,20 @@
+.body {
+  width: calc(100% - 2rem);
+  margin-left: 2rem;
+  z-index: 0;
+  position: relative;
+  top: 0;
+  transition: all 0.5s ease;
+  background: #f9fafb;
+  padding: 3rem 0 3rem 3rem;
+}
+
+.body-origin {
+  width: calc(100% - 13.5rem);
+  margin-left: 13.5rem;
+}
+
+.body-md {
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
+}
