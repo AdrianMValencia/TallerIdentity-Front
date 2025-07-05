@@ -39,7 +39,7 @@
                     }
                 </a>
                 } @if(!data.items || (data.items && data.items.length === 0)){
-                <a class="sidebar-nav-link" [routerLink]="[data.route]" routerLinkActive="active"
+                <a class="sidebar-nav-link" [routerLink]="[data.path]" routerLinkActive="active"
                     [routerLinkActiveOptions]="{ exact: true }" (click)="shrinkItems(data)">
                     <mat-icon class="sidebar-link-icon" [fontIcon]="data.icon"></mat-icon>
                     @if (collapsed) {

@@ -33,7 +33,7 @@
             }
         </a>
         } @if (!item.items || (item.items && item.items.length === 0)) {
-        <a class="sublevel-nav-link" [routerLink]="[item.route]" routerLinkActive="active-sublevel"
+        <a class="sublevel-nav-link" [routerLink]="[item.path]" routerLinkActive="active-sublevel"
             [routerLinkActiveOptions]="{ exact: true }">
             <!-- <i class="sublevel-link-icon fa fa-users"></i> -->
             <mat-icon class="sublevel-link-icon" [fontIcon]="item.icon"></mat-icon>

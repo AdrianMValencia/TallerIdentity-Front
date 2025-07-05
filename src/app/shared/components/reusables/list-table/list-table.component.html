@@ -1,0 +1,152 @@
+<div class="h-full flex flex-col relative bg-white">
+  <ngx-spinner [fullScreen]="false" bdColor="rgb(70, 84, 153, 0.3)" size="medium" name="modal-table" color="#7084E3"
+    type="ball-clip-rotate-pulse">
+  </ngx-spinner>
+
+  <div class="h-full" [class.overflow-auto]="dataSource.filteredData.length">
+    <table [@scaleFadeIn]="dataSource.filteredData" [dataSource]="dataSource" class="w-full"
+      [ngClass]="!striped ? '' : 'striped'" mat-table matSort matSortDisableClear [matSortActive]="sortBy"
+      [matSortDirection]="sortDir" multiTemplateDataRows>
+      {{
+      striped
+      }}
+
+      @for (column of columns; track column.property) { @if (column.type ===
+      'number') {
+      <ng-container [matColumnDef]="column.property" [sticky]="column.sticky" [stickyEnd]="column.stickyEnd">
+        <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column.sortProperty" [disabled]="!column.sort"
+          [ngClass]="column.cssLabel">
+          {{ column.label }}
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <div (click)="
+              column.action ? rowClick.emit({ action: column.action, row }) : ''
+            ">
+            @if (!row[column.subProperty]) {
+            <p [ngClass]="column.cssProperty">{{ row[column.property] }}</p>
+            } @else {
+            <p [ngClass]="column.cssProperty">{{ row[column.property] }}</p>
+            <p [ngClass]="column.cssSubProperty">
+              {{ row[column.subProperty] }}
+            </p>
+            }
+          </div>
+        </td>
+      </ng-container>
+      } @if (column.type === 'text') {
+      <ng-container [matColumnDef]="column.property" [sticky]="column.sticky" [stickyEnd]="column.stickyEnd">
+        <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column.sortProperty" [disabled]="!column.sort"
+          [ngClass]="column.cssLabel">
+          {{ column.label }}
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <div (click)="
+              column.action ? rowClick.emit({ action: column.action, row }) : ''
+            ">
+            @if (!row[column.subProperty]) {
+            <p [ngClass]="column.cssProperty">
+              {{
+              row[column.property] != ""
+              ? row[column.property]
+              : ("-" | titlecase)
+              }}
+            </p>
+            } @else {
+            <p [ngClass]="column.cssProperty">
+              {{ row[column.property] | titlecase }}
+            </p>
+            <p [ngClass]="column.cssSubProperty">
+              {{ row[column.subProperty] | titlecase }}
+            </p>
+            }
+          </div>
+        </td>
+      </ng-container>
+      } @if (column.type === 'date') {
+      <ng-container [matColumnDef]="column.property" [sticky]="column.sticky" [stickyEnd]="column.stickyEnd">
+        <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column.sortProperty" [disabled]="!column.sort"
+          [ngClass]="column.cssLabel">
+          {{ column.label }}
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <div [ngClass]="column.cssProperty">
+            @if (row[column.property]) {
+            <p class="font-bold text-xs text-black">
+              {{ row[column.property] | date : "dd MMM YYYY" }}
+            </p>
+            <p class="text-xs text-am-gray">
+              {{ row[column.property] | date : "EEEE" | titlecase }}
+            </p>
+            } @else {
+            <p class="font-bold text-xs text-black">-</p>
+            }
+          </div>
+        </td>
+      </ng-container>
+      } @if (column.type === 'datetime') {
+      <ng-container [matColumnDef]="column.property" [sticky]="column.sticky" [stickyEnd]="column.stickyEnd">
+        <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column.sortProperty" [disabled]="!column.sort"
+          [ngClass]="column.cssLabel">
+          {{ column.label }}
+        </th>
+        <td mat-cell *matCellDef="let row" [ngClass]="column.cssProperty">
+          {{ row[column.property] | date : "dd-MM-yyyy hh:mm:ss a" }}
+        </td>
+      </ng-container>
+      } @if (column.type === 'simpleBadge') {
+      <ng-container [matColumnDef]="column.property" [sticky]="column.sticky" [stickyEnd]="column.stickyEnd">
+        <th mat-header-cell *matHeaderCellDef [mat-sort-header]="column.sortProperty" [disabled]="!column.sort"
+          [ngClass]="column.cssLabel" class="w-20">
+          {{ column.label }}
+        </th>
+        <td mat-cell *matCellDef="let row" [ngClass]="column.cssProperty">
+          <div [ngClass]="row[column.property].css" [matTooltip]="row[column.property].tooltip || ''"
+            matTooltipPosition="above">
+            {{ row[column.property].label }}
+          </div>
+        </td>
+      </ng-container>
+      } @if (column.type === 'icon') {
+      <ng-container [matColumnDef]="column.property" [sticky]="column.sticky" [stickyEnd]="column.stickyEnd">
+        <th mat-header-cell *matHeaderCellDef [ngClass]="column.cssLabel">
+          {{ column.label }}
+        </th>
+        <td mat-cell *matCellDef="let row" [ngClass]="column.cssProperty">
+          @if (row[column.property].icon) {
+          <div [ngClass]="row[column.property].css" [class]="column.action ? 'cursor-pointer' : ''" (click)="
+              column.action
+                ? rowClick.emit({
+                    action: column.action,
+                    row,
+                    allList: dataSource.filteredData
+                  })
+                : ''
+            ">
+            <mat-icon matTooltipPosition="above" [matTooltip]="row[column.property].tooltip"
+              [fontIcon]="row[column.property].icon">
+            </mat-icon>
+          </div>
+          }
+        </td>
+      </ng-container>
+      } }
+
+      <tr mat-header-row *matHeaderRowDef="visibleColumns; sticky: true" class="h-18"></tr>
+      <tr mat-row *matRowDef="let row; let i = index; columns: visibleColumns" @fadeInUp class="h-16"></tr>
+    </table>
+
+    @if (dataSource.filteredData.length === 0) {
+    <div class="flex h-full flex-col justify-center items-center">
+      <img @scaleFadeIn class="m-12 h-36" src="public/idea.svg" />
+      <span class="headline m-0 text-center text-xl">No hay resultados en esta búsqueda</span>
+    </div>
+    }
+  </div>
+
+  <div class="h-24 flex gap-4 justify-between items-center flex-grap mx-10 my-2">
+    <mat-paginator class="mat-paginator" [class.hidden]="!dataSource.filteredData.length || !showPaginator"
+      [pageSizeOptions]="paginatorOptions.pageSizeOptions" [pageSize]="paginatorOptions.pageSize"
+      [length]="paginatorOptions.pageLength" [showFirstLastButtons]="true">
+    </mat-paginator>
+  </div>
+</div>

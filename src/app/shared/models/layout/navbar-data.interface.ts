@@ -1,6 +1,6 @@
 export interface INavbarData {
   menuId?: number;
-  route: string;
+  path: string;
   icon: string;
   label: string;
   expanded?: boolean;
@@ -9,17 +9,17 @@ export interface INavbarData {
 
 export const navbarData: INavbarData[] = [
   {
-    route: 'users',
+    path: 'users',
     icon: 'group',
     label: 'Usuarios',
   },
   {
-    route: 'roles',
+    path: 'roles',
     icon: 'add_moderator',
     label: 'Roles',
   },
   {
-    route: 'user-roles',
+    path: 'user-roles',
     icon: 'manage_accounts',
     label: 'Rol de usuarios',
   }

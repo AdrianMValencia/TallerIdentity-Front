@@ -1,0 +1,95 @@
+.icon-hover:hover mat-icon {
+  display: block;
+}
+
+.mat-column-expandedDetail {
+  padding: 0px !important;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse; // Evita bordes duplicados
+  background: white;
+}
+
+table th,
+table td {
+  border: none; // Quitar bordes verticales
+}
+
+table tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1); // Solo bordes horizontales
+  transition: border-color 0.3s ease, background-color 0.3s ease; // Transiciones suaves
+}
+
+// table tr:nth-child(even) {
+//   background-color: #ffffff;
+// }
+
+// table tr:nth-child(odd) {
+//   background-color: #edeaf7;
+// }
+
+table tr:hover {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2); // Realce del borde inferior al pasar el cursor
+  background-color: #f2f2f2; // Color de fondo más claro en hover
+}
+
+.mat-column-sNombre_Requerimiento {
+  width: 20%;
+}
+
+.mat-column-totalRow {
+  width: 15%;
+}
+
+.rowHeader {
+  background: #f7f8ff;
+}
+
+// ::-webkit-scrollbar {
+//   width: 8px !important;
+//   height: 8px !important;
+// }
+
+// ::-webkit-scrollbar-track {
+//   background: #f7f8ff;
+//   border-radius: 8px !important;
+// }
+
+// ::-webkit-scrollbar-track {
+//   background: transparent;
+// }
+
+// ::-webkit-scrollbar-thumb {
+//   background-color: #9c9da1;
+//   border-radius: 8px;
+// }
+
+.material-icons.color_blue {
+  color: #004a89;
+}
+
+.material-icons.color_red {
+  color: #ac3d3d;
+}
+
+.mat-paginator {
+  background: white;
+}
