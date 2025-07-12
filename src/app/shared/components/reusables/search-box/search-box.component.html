@@ -1,0 +1,82 @@
+<form [formGroup]="form$" (ngSubmit)="submit()">
+  <div
+    class="flex items-center justify-center bg-white border border-am-main-blue-light rounded-2xl overflow-hidden w-full mx-auto h-11"
+  >
+    @if(searchOptions.length > 1){
+    <button
+      type="button"
+      [matMenuTriggerFor]="menu"
+      class="flex items-center p-2 text-am-main-blue bg-white pt-1"
+    >
+      <mat-icon
+        [fontIcon]="labelSelection.icon"
+        inline="true"
+        class="mt-1"
+        size="24px"
+      >
+      </mat-icon>
+      <mat-icon
+        fontIcon="arrow_drop_down"
+        inline="true"
+        class="mt-1"
+        size="24px"
+      >
+      </mat-icon>
+    </button>
+    }
+    <button
+      type="submit"
+      [disabled]="form$.invalid"
+      class="bg-white rounded-sm text-am-purple-dark p-2"
+    >
+      <mat-icon
+        fontIcon="search"
+        class="flex justify-center items-start h-screen pt-1"
+        size="24px"
+      ></mat-icon>
+    </button>
+    <input
+      class="desktop border-0 h-11 outline-none placeholder:text-secondary text-xs bg-card flex-auto"
+      type="text"
+      matInput
+      formControlName="searchData"
+      matTooltip="{{ labelSelection.validation_desc }}"
+      placeholder="{{ labelSelection.placeholder }}"
+    />
+    @if(form$.valid){
+    <button
+      (click)="reset()"
+      @scaleInOut
+      class="mr-4 flex items-end"
+      type="button"
+    >
+      <mat-icon fontIcon="close" class="flex-none text-md"></mat-icon>
+    </button>
+    }
+    <mat-menu #menu="matMenu" class="shadow-2xl">
+      @for (option of searchOptions; track $index) {
+      <button
+        mat-menu-item
+        (click)="changeSelection(option)"
+        class="text-am-main-blue"
+      >
+        <mat-icon
+          [fontIcon]="option.icon"
+          inline="true"
+          class="text-am-main-blue"
+          size="24px"
+        >
+        </mat-icon>
+        <span
+          class="text-xs"
+          [ngClass]="{
+            'text-am-main-blue': option == labelSelection
+          }"
+        >
+          {{ option.label }}
+        </span>
+      </button>
+      }
+    </mat-menu>
+  </div>
+</form>

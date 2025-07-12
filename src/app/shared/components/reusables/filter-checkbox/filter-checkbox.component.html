@@ -1,0 +1,43 @@
+<div class="px-2 max-h-60 max-w-60">
+  <section class="capitalize">
+    @if(task.subtasks.length > 1){
+    <span>
+      <mat-checkbox
+        [checked]="allComplete"
+        color="primary"
+        [indeterminate]="someComplete()"
+        (change)="setAll($event.checked)"
+        (click)="$event.stopPropagation()"
+      >
+        {{ task.label }}
+      </mat-checkbox>
+    </span>
+    } @if(task.subtasks.length == 0){
+    <span>No hay resultados</span>
+    }
+    <span>
+      <ul>
+        @for (subtask of task.subtasks; track $index) {
+        <li>
+          <mat-checkbox
+            [(ngModel)]="subtask.completed"
+            color="primary"
+            (ngModelChange)="updateData()"
+            (click)="$event.stopPropagation()"
+          >
+            @if(subtask != null){
+            <div class="flex items-center h-9 gap-2">
+              <mat-icon
+                [ngClass]="subtask.cssIcon"
+                [fontIcon]="subtask.icon!"
+              ></mat-icon>
+              {{ subtask.label }}
+            </div>
+            }
+          </mat-checkbox>
+        </li>
+        }
+      </ul>
+    </span>
+  </section>
+</div>

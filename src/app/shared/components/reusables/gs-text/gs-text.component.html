@@ -1,0 +1,75 @@
+@if (!isLoading && withLabel) {
+  <div class="text-am-purple md:text-sm text-xs">
+    {{label}}
+    @if (mode!= 'read') {
+      @if (required) {
+        <span class="text-red">*</span>
+      }
+    }
+  </div>
+}
+
+@if (isLoading && withLabel) {
+  <div class="animate-pulse bg-am-grey-light rounded h-5 min-w-36">
+  </div>
+}
+@if (!isLoading) {
+  <form appearance="outline" class="w-full ">
+    <div class="flex items-center justify-center bg-white border border-am-main-blue-light rounded-2xl overflow-hidden w-full mx-auto h-11">
+      @if (prefix_suffix.mode === 'prefix' && prefix_suffix.label !== '') {
+        <span class="md:text-sm text-xs text-am-gray w-12"
+        >{{prefix_suffix.label}}</span>
+      }
+      <input
+        matInput type="text"
+        [placeholder]="placeholderValue"
+        [formControl]="inputControl" autocomplete="off"
+        class="desktop border-0 h-11 ml-2 outline-none placeholder:text-secondary text-sm bg-card flex-auto">
+        @if (prefix_suffix.mode === 'suffix' && prefix_suffix.label !== '') {
+          <span class="md:text-sm text-xs text-am-gray w-12"
+          >{{prefix_suffix.label}}</span>
+        }
+      </div>
+      @if (inputControl.hasError('required')) {
+        <mat-error>*Este campo es obligatorio. </mat-error>
+      }
+      @if (inputControl.hasError('IsNotNumber')) {
+        <mat-error>*Soló se admiten números. </mat-error>
+      }
+      @if (inputControl.hasError('alphanumeric')) {
+        <mat-error>*No se admiten caracteres especiales</mat-error>
+      }
+      @if (inputControl.hasError('whitespace')) {
+        <mat-error>*No puede contener solo espacios en blanco.</mat-error>
+      }
+      @if (inputControl.hasError('IsNotTextOrSpace')) {
+        <mat-error>*No se admite números ni caracteres especiales</mat-error>
+      }
+      @if (inputControl.hasError('hasNumber')) {
+        <mat-error>*Debe contener al menos un número</mat-error>
+      }
+      @if (inputControl.hasError('hasCapitalCase')) {
+        <mat-error>*Ingrese al menos una letra mayúscula</mat-error>
+      }
+      @if (inputControl.hasError('hasSmallCase')) {
+        <mat-error>*Ingrese al menos una letra minúscula</mat-error>
+      }
+      @if (inputControl.hasError('hasSpecialCharacters')) {
+        <mat-error>*Debe contener al menos un caracter especial</mat-error>
+      }
+      @if (inputControl.hasError('minlength')) {
+        <mat-error>*Ingrese al menos {{inputControl.errors!.minlength.requiredLength}} dígitos.</mat-error>
+      }
+      @if (inputControl.hasError('maxlength')) {
+        <mat-error>*Máximo {{inputControl.errors!.maxlength.requiredLength}} dígitos permitidos. </mat-error>
+      }
+      @if (inputControl.hasError('notValidRUC')) {
+        <mat-error>*Ingrese un número de RUC válido.</mat-error>
+      }
+    </form>
+  }
+
+  @if (isLoading) {
+    <div class="animate-pulse bg-am-grey-light rounded h-13 mt-1 min-w-36">
+    </div>
+  }

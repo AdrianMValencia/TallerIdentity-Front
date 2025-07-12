@@ -1,0 +1,8 @@
+<button
+  class="flex rounded-2xl h-11 button-filter items-center p-3 justify-center gap-2 bg-am-main-custom2-dark"
+  [matTooltip]="infoButton.tooltip"
+  (click)="clickButton.emit()"
+>
+  <mat-icon class="text-white" [fontIcon]="infoButton.icon"></mat-icon>
+  <div class="text-white text-sm">{{ infoButton.label }}</div>
+</button>

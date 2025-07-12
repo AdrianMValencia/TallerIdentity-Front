@@ -1,0 +1,37 @@
+// Estilo para un input que tenga la clase 'open'
+// Se usa cuando el input está activo o visible
+input.open {
+  min-width: 190px; // Establece un ancho mínimo de 190px cuando está abierto
+  opacity: 1; // Totalmente visible
+}
+
+// Estilo base para todos los inputs (antes de estar "abiertos" o visibles)
+input {
+  min-width: 0; // Sin ancho mínimo, se puede colapsar
+  width: 30px; // Ancho inicial muy reducido
+  transition: min-width 0.7s, opacity 0.7s; // Animación suave de ancho y opacidad al cambiar estado
+  opacity: 0; // Invisible inicialmente
+}
+
+// Estilo para el input en dispositivos de escritorio
+input.desktop {
+  min-width: 250px; // En pantallas grandes, el input abierto tiene más espacio
+  opacity: 1; // Totalmente visible
+}
+
+// Estilo para un botón de tipo submit que esté deshabilitado
+button[type="submit"]:disabled {
+  opacity: 0.2; // Se muestra con menor opacidad (visual de desactivado)
+  cursor: default; // Cursor normal, no permite interacción como un botón
+}
+
+// Clase de utilidad para etiquetas que deben tener un ancho mínimo específico
+.main-label-101 {
+  min-width: 101px; // Garantiza que la etiqueta tenga al menos 101px de ancho
+}
+
+// Clase utilizada posiblemente para animaciones o aparición de elementos
+.prueba {
+  transition: 0.5s linear all; // Aplica transición suave a todas las propiedades en 0.5 segundos
+  opacity: 0; // El elemento comienza invisible
+}

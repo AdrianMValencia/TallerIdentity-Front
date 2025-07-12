@@ -1,0 +1,9 @@
+.button-filter {
+  // Aplica estilos al elemento <span> que esté dentro de un elemento con clase 'button-filter'
+  span {
+    overflow: hidden;           // Oculta cualquier contenido que se desborde del ancho del span
+    white-space: nowrap;        // Evita que el texto se divida en múltiples líneas
+    text-overflow: ellipsis;    // Si el texto se desborda, muestra puntos suspensivos (...)
+    display: inline-block;      // Permite que el span tenga un ancho definido por su contenido, pero respete las restricciones del contenedor
+  }
+}

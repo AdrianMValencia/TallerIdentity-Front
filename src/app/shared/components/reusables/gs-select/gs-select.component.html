@@ -1,0 +1,61 @@
+@if (!isLoading && withLabel) {
+  <div class="text-am-purple md:text-sm text-xs "> {{label}}
+    @if (mode!= 'read') {
+      @if (required) {
+        <span class="text-red">*</span>
+      }
+    }
+  </div>
+}
+
+@if (isLoading && withLabel) {
+  <div class="animate-pulse bg-am-grey-light rounded h-5 min-w-36"></div>
+}
+@if (isLoading) {
+  <div class="animate-pulse bg-am-grey-light rounded h-13 mt-1 min-w-36"></div>
+}
+
+@if (!isLoading) {
+  <form appearance="outline" class="w-full">
+    <div class="flex items-center justify-center bg-white border border-am-main-blue-light rounded-2xl overflow-hidden w-full mx-auto h-11">
+      <input type="text" class="desktop border-0 h-11 ml-2 outline-none placeholder:text-secondary text-sm bg-card flex-auto" [placeholder]="placeholder" matInput
+        [formControl]="inputControl" [matAutocomplete]="optionsAutocomplete" autocomplete="off">
+        @if (mode!= 'read') {
+          @if (inputControl.value) {
+            <button @scaleInOut
+              (click)="setVisibleOptions(inputControl.value, true); inputControl.reset();" class="mr-4"
+              [ngClass]="{'text-gray' :inputControl.disabled, 'text-black':inputControl.enabled}" type="button"
+              [disabled]="inputControl.disabled">
+              <mat-icon fontIcon="close" class="flex-none text-xl"></mat-icon>
+            </button>
+          }
+          <mat-icon class="text-xl text-am-main-blue-light" fontIcon="arrow_drop_down"></mat-icon>
+        }
+      </div>
+      @if (hint_message) {
+        <mat-hint class="rounded p-2 flex items-start gap-2 w-full bg-am-base-background">
+          <mat-icon class="text-xl text-am-gray-dark" fontIcon="info"></mat-icon>
+          <div class="text-xs break-words text-am-gray-dark" [innerHTML]="hint_message"></div>
+        </mat-hint>
+      }
+      @if (inputControl.hasError('optionInvalid')) {
+        <mat-error>* Seleccione una opción válida. </mat-error>
+      }
+      @if (inputControl.hasError('required')) {
+        <mat-error>* Este campo es obligatorio. </mat-error>
+      }
+      @if (inputControl.hasError('isEmptyArrayOptions')) {
+        <mat-error>* El listado esta vacio. </mat-error>
+      }
+      <mat-autocomplete #optionsAutocomplete="matAutocomplete" [displayWith]="showDropdrown.bind(this)"
+        (optionSelected)="setVisibleOptions($event.option.value, false)">
+        @for (option of filteredOptions | async; track option) {
+          <mat-option [value]="option.code"
+            matTooltip="{{option.description}}" matToolTipPosition="after" matTooltipShowDelay="500"
+            matTooltipHideDelay="100">
+            {{option.description}}
+          </mat-option>
+        }
+      </mat-autocomplete>
+    </form>
+  }
