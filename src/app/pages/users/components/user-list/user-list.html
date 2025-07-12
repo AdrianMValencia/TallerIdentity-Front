@@ -1,10 +1,37 @@
-<p>user-list works!</p>
-<p>user-list works!</p>
-<p>user-list works!</p>
-<p>user-list works!</p>
-<p>user-list works!</p>
-<p>user-list works!</p>
-<p>user-list works!</p>
-<p>user-list works!</p>
-<p>user-list works!</p>
-<p>user-list works!</p>
+<div
+  class="max-w-screen-160 mx-auto h-full flex flex-col px-10 py-6 gap-4 mt-6"
+>
+  <div class="flex justify-between flex-wrap gap-4">
+    <div class="flex items-center">
+      <mat-icon
+        @scaleIn
+        class="text-2xl text-am-main-blue"
+        [fontIcon]="iconUser$"
+      ></mat-icon>
+      <div
+        @fadeInRight
+        class="text-3xl font-medium italic text-am-main-blue-dark ml-2"
+      >
+        Usuarios
+      </div>
+    </div>
+    <div class="flex gap-2 items-center w-full smd:w-fit justify-end flex-wrap">
+      <div class="w-full sm:w-fit">
+        <app-search-box 
+          [searchOptions]="componentUser$.searchOptions"
+          [currentValue]="componentUser$.filters.textFilter"
+          (search)="search($event)" />
+      </div>
+    </div>
+  </div>
+  <div class="card h-full shadow-xl rounded-3xl overflow-hidden flex-auto">
+    <app-list-table
+      (rowClick)="rowClick($event)"
+      [service]="userService"
+      [columns]="componentUser$.tableColumns"
+      [sortBy]="componentUser$.initialSort"
+      [sortDir]="componentUser$.initialSortDir"
+      [getInputs]="componentUser$.getInputs"
+    />
+  </div>
+</div>

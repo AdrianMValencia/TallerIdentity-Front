@@ -69,8 +69,8 @@ export class SearchBoxComponent implements OnInit {
     // - searchValue: el criterio de búsqueda seleccionado (ej: por nombre, por código)
     // - searchData: el valor que el usuario escribe para buscar
     this.form$ = this.fb.group({
-      searchValue: [''],
-      searchData: [''],
+      searchValue: [''], // Representa el numFilter del Backend
+      searchData: [''], // Representa el textFilter del Backend
     });
 
     // Se selecciona por defecto la primera opción de búsqueda

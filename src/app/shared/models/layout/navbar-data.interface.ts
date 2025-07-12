@@ -10,7 +10,7 @@ export interface INavbarData {
 export const navbarData: INavbarData[] = [
   {
     path: 'users',
-    icon: 'group',
+    icon: 'groups',
     label: 'Usuarios',
   },
   {
