@@ -1,37 +1,64 @@
-<div
-  class="max-w-screen-160 mx-auto h-full flex flex-col px-10 py-6 gap-4 mt-6"
->
-  <div class="flex justify-between flex-wrap gap-4">
-    <div class="flex items-center">
-      <mat-icon
-        @scaleIn
-        class="text-2xl text-am-main-blue"
-        [fontIcon]="iconUser$"
-      ></mat-icon>
-      <div
-        @fadeInRight
-        class="text-3xl font-medium italic text-am-main-blue-dark ml-2"
-      >
-        Usuarios
+<div class="h-screen flex flex-col px-6 py-6 gap-6 overflow-hidden">
+  <div class="bg-white rounded-3xl shadow-xl p-6 flex flex-col gap-4">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center">
+        <mat-icon
+          @scaleIn
+          class="text-xl text-am-main-blue-dark mb-1"
+          [fontIcon]="iconUser$"
+        ></mat-icon>
+        <div
+          @fadeInRight
+          class="ml-2 text-xl font-semibold italic text-am-main-blue-dark"
+        >
+          Usuarios
+        </div>
       </div>
-    </div>
-    <div class="flex gap-2 items-center w-full smd:w-fit justify-end flex-wrap">
-      <div class="w-full sm:w-fit">
-        <app-search-box 
+
+      <div
+        class="flex flex-wrap gap-2 items-center justify-end w-full sm:w-auto"
+      >
+        <app-search-box
           [searchOptions]="componentUser$.searchOptions"
           [currentValue]="componentUser$.filters.textFilter"
-          (search)="search($event)" />
+          (search)="search($event)"
+        />
+        <!-- <app-export-excel [url]="getDownloadUrl" [getInputs]="componentProduct$.getInputs"
+          [filename]="componentProduct$.filename" /> -->
+      </div>
+    </div>
+
+    <div class="flex justify-between flex-wrap gap-4">
+      <div class="flex gap-2 flex-wrap items-end">
+        <app-filter-menu-states
+          [menuFilter]="componentUser$.menuItems"
+          [initfilters]="componentUser$.filters.stateFilter"
+          [reset]="resetChecks"
+          (dataChecked)="setDataFilterStates($event)"
+        />
+        <app-split-button
+          [configButtons]="componentUser$.filterButtons"
+          (doThisFunction)="resetButton($event)"
+        />
+      </div>
+      <div class="flex items-end">
+        <app-generic-button
+          [infoButton]="componentUser$.actionButtonUser"
+          (clickButton)="newUser()"
+        />
       </div>
     </div>
   </div>
-  <div class="card h-full shadow-xl rounded-3xl overflow-hidden flex-auto">
-    <app-list-table
+  <div class="bg-white rounded-3xl shadow-xl p-6 flex flex-col gap-4 overflow-hidden mb-12">
+    <div class="h-full overflow-auto">
+      <app-list-table
       (rowClick)="rowClick($event)"
       [service]="userService"
       [columns]="componentUser$.tableColumns"
       [sortBy]="componentUser$.initialSort"
       [sortDir]="componentUser$.initialSortDir"
       [getInputs]="componentUser$.getInputs"
-    />
+      />
+    </div>
   </div>
 </div>

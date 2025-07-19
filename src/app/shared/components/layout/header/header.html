@@ -19,7 +19,7 @@
         <ul>
             @for (item of userItems; track $index) {
             <li cdkMenuItem>
-                <a>
+                <a (click)="onMenuItemClick(item.actionKey)">
                     <i class="icon" [ngClass]="item.icon"></i>
                     <span>{{ item.label }}</span>
                 </a>

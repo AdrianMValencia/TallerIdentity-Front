@@ -1,6 +1,9 @@
 import { TableColumns } from '@app/shared/models/reusables/list-table.interface';
 import { UserResponse } from '../../models/user-response.interface';
 import { GenericValidators } from '@app/shared/utils/generic-validators.util';
+import { MenuFilterTable } from '@app/shared/models/reusables/filter-menu-states.interface';
+import { SplitButton } from '@app/shared/models/reusables/split-button.interface';
+import { GenericButton } from '@app/shared/models/reusables/generic-button.interface';
 
 const tableColumns: TableColumns<UserResponse>[] = [
   {
@@ -115,6 +118,51 @@ const searchOptions = [
   },
 ];
 
+const actionButtonUser: GenericButton = {
+  label: 'Crear usuario',
+  icon: 'add',
+  tooltip: 'Crear nuevo usuario',
+};
+
+const menuItems: MenuFilterTable = {
+  label: 'Estados',
+  icon: 'filter_list',
+  tooltip: 'Estados',
+  menuItems: [
+    {
+      label: 'Activo',
+      icon: 'label',
+      cssIcon: ['text-am-new-green'],
+      value: 1,
+    },
+    {
+      label: 'Inactivo',
+      icon: 'label',
+      cssIcon: ['text-am-gray-light'],
+      value: 0
+    }
+  ],
+};
+
+const filterButtons: SplitButton[] = [
+  {
+    type: 'button',
+    icon: 'refresh',
+    label: 'Actualizar listado',
+    value: 1,
+  },
+  {
+    type: 'action',
+    id: 'Pendiente',
+    icon: 'restart_alt',
+    label: 'Refrescar filtros',
+    value: 2,
+    classes: {
+      icon: 'text-am-main-blue-dark text-md',
+    },
+  },
+];
+
 const initFilters = {
   numFilter: 0,
   textFilter: '',
@@ -132,6 +180,9 @@ const filters = {
 export const componentUserSetting = {
   tableColumns,
   searchOptions,
+  menuItems,
+  filterButtons,
+  actionButtonUser,
   getInputs: '',
   initFilters,
   filters,

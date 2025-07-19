@@ -1,0 +1,64 @@
+<div class="w-full h-full login-fondo">
+  <div class="login">
+    <div class="avatar">
+      <img src="public/avatar.jpg" />
+    </div>
+    <h2>Iniciar Sesión</h2>
+    <h3>Bienvenido a tu sistema</h3>
+    <br />
+    <form [formGroup]="form" class="login-form">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          placeholder="Ingrese su email"
+          formControlName="email"
+        />
+        <mat-icon
+          matSuffix
+          [fontIcon]="icEmail"
+          class="text-am-main-blue-dark"
+        ></mat-icon>
+        @if (form.get('email')!.hasError('required')) {
+        <mat-error>Email es requerido</mat-error>
+        }
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>Contraseña</mat-label>
+        <input
+          [type]="typeInput"
+          placeholder="Ingrese la contraseña"
+          formControlName="password"
+          matInput
+        />
+        <button
+          (click)="toggleVisibility()"
+          mat-icon-button
+          matSuffix
+          matTooltip="{{ !visible ? 'Ver contraseña' : 'Ocultar contraseña' }}"
+        >
+          @if(visible) {
+          <mat-icon
+            [fontIcon]="icVisibility"
+            class="pr-9 text-am-main-blue-dark"
+          ></mat-icon>
+          } @if(!visible) {
+          <mat-icon
+            [fontIcon]="icVisibilityOff"
+            class="pr-9 text-am-main-blue-dark"
+          ></mat-icon>
+          }
+        </button>
+        @if (form.get('password')!.hasError('required')) {
+        <mat-error>Contraseña es requerida</mat-error>
+        }
+      </mat-form-field>
+      <button
+        class="flex rounded-2xl h-11 button-filter items-center p-3 justify-center gap-2 bg-am-main-blue-dark"
+        (click)="login()"
+      >
+        Iniciar Sesión
+      </button>
+    </form>
+  </div>
+</div>

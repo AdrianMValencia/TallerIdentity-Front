@@ -2,18 +2,22 @@ export const userItems = [
   {
     icon: 'fal fa-user',
     label: 'Profile',
+    actionKey: 'goProfile',
   },
   {
     icon: 'fal fa-cog',
     label: 'Settings',
+    actionKey: 'goSetting',
   },
   {
     icon: 'fal fa-unlock-alt',
     label: 'Lock screen',
+    actionKey: 'goLockScreen',
   },
   {
     icon: 'fal fa-power-off',
     label: 'Logout',
+    actionKey: 'logout',
   },
 ];
 

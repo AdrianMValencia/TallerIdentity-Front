@@ -1,6 +1,7 @@
 import { CdkMenuTrigger } from '@angular/cdk/menu';
 import { NgClass } from '@angular/common';
-import { Component, HostListener, Input } from '@angular/core';
+import { Component, HostListener, inject, Input } from '@angular/core';
+import { Auth } from '@app/pages/auth/services/auth';
 import { userItems } from '@app/shared/utils/global-constants.util';
 
 @Component({
@@ -10,6 +11,8 @@ import { userItems } from '@app/shared/utils/global-constants.util';
   styleUrl: './header.scss',
 })
 export class Header {
+  private readonly authService = inject(Auth);
+
   @Input() collapsed = false;
   @Input() screenWidth = 0;
 
@@ -43,6 +46,16 @@ export class Header {
       this.canShowSearchAsOverlay = true;
     } else {
       this.canShowSearchAsOverlay = false;
+    }
+  }
+
+  onMenuItemClick(actionKey: string): void {
+    console.log('actionKey ', actionKey);
+    switch (actionKey) {
+      case 'logout':
+        this.authService.logout();
+        break;
+      default:
     }
   }
 }

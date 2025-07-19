@@ -4,3 +4,115 @@
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field.mat-mdc-form-field
+  .mdc-notched-outline__notch {
+  border-right-style: hidden;
+}
+
+.mat-mdc-input-element {
+  box-shadow: none !important;
+}
+
+[type="text"],
+[type="email"],
+[type="url"],
+[type="password"],
+[type="number"],
+[type="date"],
+[type="datetime-local"],
+[type="month"],
+[type="search"],
+[type="tel"],
+[type="time"],
+[type="week"],
+[multiple],
+textarea,
+select {
+  padding: 0;
+  border: none;
+  background: white;
+}
+
+// Sobrescribe la fuente de Angular Material
+.mat-mdc-typography,
+.mat-mdc-form-field,
+.mat-mdc-button,
+.mat-mdc-input-element,
+.mat-mdc-select,
+.mat-mdc-option,
+.mat-mdc-menu-item,
+.mat-mdc-dialog-container,
+.mat-mdc-snack-bar-container,
+.mat-mdc-card,
+.mat-mdc-table,
+.mat-mdc-paginator,
+.mat-mdc-list,
+.mat-mdc-chip,
+.mat-mdc-tooltip,
+.mat-mdc-tab,
+.mat-mdc-tab-label,
+.mat-mdc-tab-link,
+.mat-mdc-expansion-panel,
+.mat-mdc-stepper,
+.mat-mdc-autocomplete-panel,
+.mat-mdc-slide-toggle,
+.mat-mdc-slider,
+.mat-mdc-progress-bar,
+.mat-mdc-progress-spinner,
+.mat-mdc-checkbox,
+.mat-mdc-radio-button,
+.mat-mdc-radio-group,
+.mat-mdc-toolbar,
+.mat-mdc-sidenav,
+.mat-mdc-menu,
+.mat-mdc-tree,
+.mat-mdc-badge,
+.mat-mdc-divider,
+.mat-mdc-icon,
+.mat-mdc-bottom-sheet-container,
+.mat-mdc-dialog-title,
+.mat-mdc-dialog-content,
+.mat-mdc-dialog-actions {
+  font-family: "Poppins", sans-serif !important;
+}
+
+// Fondo blanco para paneles y menús de Angular Material
+.mat-mdc-menu-panel,
+.mat-mdc-select-panel,
+.mat-mdc-autocomplete-panel,
+.mat-mdc-dialog-container,
+.mat-mdc-snack-bar-container,
+.mat-mdc-card,
+.mat-mdc-option,
+.mat-mdc-list,
+.mat-mdc-table,
+.mat-mdc-paginator,
+.mat-mdc-expansion-panel,
+.mat-mdc-tooltip,
+.mat-mdc-bottom-sheet-container,
+.mat-datepicker-content {
+  background: #fff !important;
+  border-radius: 16px !important;
+}
+
+.mat-datepicker-content {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Skeleton shimmer effect */
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+  background: #e0e0e0; /* Gris claro visible sobre fondo blanco */
+}
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -150px; height: 100%; width: 150px;
+  background: linear-gradient(90deg, transparent, #f5f5f5 60%, transparent);
+  animation: shimmer 1.2s infinite;
+}
+@keyframes shimmer {
+  100% { left: 100%; }
+}

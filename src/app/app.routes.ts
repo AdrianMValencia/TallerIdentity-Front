@@ -14,7 +14,19 @@ const childrenRoutes: Routes = [
 export const routes: Routes = [
   {
     path: '',
+    redirectTo: 'users',
+    pathMatch: 'full',
+  },
+  {
+    path: '',
     component: Layout,
     children: childrenRoutes,
+  },
+  {
+    path: 'login',
+    loadComponent: () =>
+      import('./pages/auth/components/login/login').then(
+        (c) => c.Login
+      ),
   },
 ];

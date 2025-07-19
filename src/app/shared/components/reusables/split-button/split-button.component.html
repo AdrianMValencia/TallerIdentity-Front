@@ -1,0 +1,32 @@
+<div
+  class="mx-1 flex bg-am-main-custom3-dark rounded-xl divide-x divide-am-main-custom3"
+>
+  <button
+    class="flex h-11 items-center p-3 justify-center gap-2"
+    [matTooltip]="ppalButton.label"
+    (click)="setAction(ppalButton.value!)"
+  >
+    <mat-icon class="text-white" [fontIcon]="ppalButton.icon!"></mat-icon>
+  </button>
+  <button
+    [matMenuTriggerFor]="tipoContenido"
+    class="flex h-11 items-center justify-center"
+  >
+    <mat-icon class="text-white" [fontIcon]="icArrowDropDown"></mat-icon>
+  </button>
+  <mat-menu #tipoContenido="matMenu" class="shadow-md mt-2 flex">
+    @for (item of actionsArray; track $index) {
+    <button
+      class="flex pl-5 pr-6 py-3 w-full hover:bg-am-base-background"
+      (click)="setAction(item.value!)"
+    >
+      <mat-icon
+        class="mr-2"
+        [ngClass]="item.classes!.icon"
+        [fontIcon]="item.icon!"
+      ></mat-icon>
+      <span class="text-sm pt-1">{{ item.label }}</span>
+    </button>
+    }
+  </mat-menu>
+</div>
