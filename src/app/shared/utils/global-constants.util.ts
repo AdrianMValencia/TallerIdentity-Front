@@ -1,3 +1,5 @@
+import { SelectResponse } from '@shared/models/commons/selects-response.interface';
+
 export const userItems = [
   {
     icon: 'fal fa-user',
@@ -40,3 +42,8 @@ export enum COLORS_BADGE {
   coral = 'text-am-coral-dark bg-am-coral-light border-am-coral-dark',
   whatsapp = 'text-white bg-am-new-green border-am-new-green',
 }
+
+export const statesSelect: SelectResponse[] = [
+  { code: '1', description: 'Activo' },
+  { code: '2', description: 'Inactivo' },
+];

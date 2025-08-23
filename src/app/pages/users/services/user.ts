@@ -1,12 +1,12 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.interface';
-import { Alert } from '@app/shared/services/alert';
+import { environment as env } from '@env/environment.development';
+import { BaseApiResponse } from '@shared/models/commons/base-api-response.interface';
+import { Alert } from '@shared/services/alert';
+import { endpoint } from '@shared/utils/endpoints.util';
+import { getIcon, getStateBadge } from '@shared/utils/functions.util';
 import { map, Observable } from 'rxjs';
 import { UserResponse } from '../models/user-response.interface';
-import { environment as env } from '@env/environment.development';
-import { endpoint } from '@app/shared/utils/endpoints.util';
-import { getIcon, getStateBadge } from '@app/shared/utils/functions.util';
 
 @Injectable({
   providedIn: 'root',

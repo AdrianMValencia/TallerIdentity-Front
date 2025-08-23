@@ -1,0 +1,25 @@
+@if (isLoading && check) {
+  <div
+    class="animate-pulse bg-am-grey-light h-13 rounded mt-1"
+  ></div>
+}
+@if (!isLoading) {
+  <div
+    class="flex items-center p-4 rounded my-1 w-full h-fit"
+    [ngClass]="classSelect"
+    (click)="changeStatus()"
+    >
+    <mat-icon
+      [fontIcon]="icon"
+      [ngClass]="classIcon"
+      class="mr-2 flex-none"
+      [class]="positionEnd ? 'order-last' : ''"
+    ></mat-icon>
+    <div class="flex flex-col flex-1">
+      <span [ngClass]="cssLabel">{{ label }}</span>
+      @if (sublabel) {
+        <span [ngClass]="cssSublabel">{{ sublabel }}</span>
+      }
+    </div>
+  </div>
+}

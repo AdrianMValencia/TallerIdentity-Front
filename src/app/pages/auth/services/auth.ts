@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.interface';
-import { endpoint } from '@app/shared/utils/endpoints.util';
 import { environment as env } from '@env/environment.development';
+import { BaseApiResponse } from '@shared/models/commons/base-api-response.interface';
+import { endpoint } from '@shared/utils/endpoints.util';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { LoginRequest } from '../models/login-request.interface';
 

@@ -1,0 +1,66 @@
+<div class="h-screen flex flex-col px-6 py-6 gap-6 overflow-hidden">
+  <div class="bg-white rounded-3xl shadow-xl p-6 flex flex-col gap-4">
+    <div class="flex items-center justify-between flex-wrap gap-4">
+      <div class="flex items-center">
+        <mat-icon
+          @scaleIn
+          class="text-xl text-am-main-blue-dark mb-1"
+          [fontIcon]="iconRole$"
+        ></mat-icon>
+        <div
+          @fadeInRight
+          class="ml-2 text-xl font-semibold italic text-am-main-blue-dark"
+        >
+          Roles
+        </div>
+      </div>
+
+      <div
+        class="flex flex-wrap gap-2 items-center justify-end w-full sm:w-auto"
+      >
+        <app-search-box
+          [searchOptions]="componentRole$.searchOptions"
+          [currentValue]="componentRole$.filters.textFilter"
+          (search)="search($event)"
+        />
+        <!-- <app-export-excel [url]="getDownloadUrl" [getInputs]="componentProduct$.getInputs"
+          [filename]="componentProduct$.filename" /> -->
+      </div>
+    </div>
+
+    <div class="flex justify-between flex-wrap gap-4">
+      <div class="flex gap-2 flex-wrap items-end">
+        <app-filter-menu-states
+          [menuFilter]="componentRole$.menuItems"
+          [initfilters]="componentRole$.filters.stateFilter"
+          [reset]="resetChecks"
+          (dataChecked)="setDataFilterStates($event)"
+        />
+        <app-split-button
+          [configButtons]="componentRole$.filterButtons"
+          (doThisFunction)="resetButton($event)"
+        />
+      </div>
+      <div class="flex items-end">
+        <app-generic-button
+          [infoButton]="componentRole$.actionButtonRole"
+          (clickButton)="newRole()"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="bg-white rounded-3xl shadow-xl p-6 flex flex-col gap-4 overflow-hidden mb-12"
+  >
+    <div class="h-full overflow-auto">
+      <app-list-table
+        (rowClick)="rowClick($event)"
+        [service]="roleService"
+        [columns]="componentRole$.tableColumns"
+        [sortBy]="componentRole$.initialSort"
+        [sortDir]="componentRole$.initialSortDir"
+        [getInputs]="componentRole$.getInputs"
+      />
+    </div>
+  </div>
+</div>

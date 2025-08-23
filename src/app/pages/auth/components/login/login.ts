@@ -12,12 +12,11 @@ import {
   MatLabel,
 } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
-import { MatInput, MatInputModule } from '@angular/material/input';
+import { MatInputModule } from '@angular/material/input';
 import { MatTooltip } from '@angular/material/tooltip';
 import { Router } from '@angular/router';
+import { BaseApiResponse } from '@shared/models/commons/base-api-response.interface';
 import { Auth } from '../../services/auth';
-import { BaseApiResponse } from '@app/shared/models/commons/base-api-response.interface';
-import { Alert } from '@app/shared/services/alert';
 
 @Component({
   selector: 'app-login',

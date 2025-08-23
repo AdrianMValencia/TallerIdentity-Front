@@ -1,20 +1,20 @@
 import { Component, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
-import { fadeInRight400ms } from '@app/shared/animations/fade-in-right.animation';
-import { scaleIn400ms } from '@app/shared/animations/scale-in.animation';
-import { ListTableComponent } from '@app/shared/components/reusables/list-table/list-table.component';
-import { SearchBoxComponent } from '@app/shared/components/reusables/search-box/search-box.component';
-import { RowClick } from '@app/shared/models/reusables/rowclick-interface';
-import { SearchBox } from '@app/shared/models/reusables/search-options.interface';
+import { fadeInRight400ms } from '@shared/animations/fade-in-right.animation';
+import { scaleIn400ms } from '@shared/animations/scale-in.animation';
+import { FilterMenuStatesComponent } from '@shared/components/reusables/filter-menu-states/filter-menu-states.component';
+import { GenericButtonComponent } from '@shared/components/reusables/generic-button/generic-button.component';
+import { ListTableComponent } from '@shared/components/reusables/list-table/list-table.component';
+import { SearchBoxComponent } from '@shared/components/reusables/search-box/search-box.component';
+import { SplitButtonComponent } from '@shared/components/reusables/split-button/split-button.component';
+import { RowClick } from '@shared/models/reusables/rowclick-interface';
+import { SearchBox } from '@shared/models/reusables/search-options.interface';
+import { Actions } from '@shared/models/reusables/split-button.interface';
 import { UserResponse } from '../../models/user-response.interface';
 import { User } from '../../services/user';
-import { componentUserSetting } from './user-list.config';
-import { FilterMenuStatesComponent } from '@app/shared/components/reusables/filter-menu-states/filter-menu-states.component';
-import { SplitButtonComponent } from '@app/shared/components/reusables/split-button/split-button.component';
-import { GenericButtonComponent } from '@app/shared/components/reusables/generic-button/generic-button.component';
-import { Actions } from '@app/shared/models/reusables/split-button.interface';
 import { UserManagement } from '../user-management/user-management';
-import { MatDialog } from '@angular/material/dialog';
+import { componentUserSetting } from './user-list.config';
 
 @Component({
   selector: 'app-user-list',
@@ -99,7 +99,7 @@ export class UserList {
     // Llama a un método para aplicar o actualizar los filtros con el nuevo estado configurado
     this.formatGetInputs();
   }
-  
+
   newUser() {
     this.dialog
       .open(UserManagement, {

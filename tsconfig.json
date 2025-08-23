@@ -5,8 +5,8 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@app/*": ["src/app/*"],
       "@shared/*": ["src/app/shared/*"],
+      "@app/*": ["src/app/*"],
       "@env/*": ["src/environments/*"]
     },
     "strict": true,
