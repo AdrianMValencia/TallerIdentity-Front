@@ -23,8 +23,11 @@
           [currentValue]="componentUser$.filters.textFilter"
           (search)="search($event)"
         />
-        <!-- <app-export-excel [url]="getDownloadUrl" [getInputs]="componentProduct$.getInputs"
-          [filename]="componentProduct$.filename" /> -->
+        <app-export-excel
+          [url]="getDownloadUrl"
+          [getInputs]="componentUser$.getInputs"
+          [filename]="componentUser$.filename"
+        />
       </div>
     </div>
 
@@ -49,15 +52,17 @@
       </div>
     </div>
   </div>
-  <div class="bg-white rounded-3xl shadow-xl p-6 flex flex-col gap-4 overflow-hidden mb-12">
+  <div
+    class="bg-white rounded-3xl shadow-xl p-6 flex flex-col gap-4 overflow-hidden mb-12"
+  >
     <div class="h-full overflow-auto">
       <app-list-table
-      (rowClick)="rowClick($event)"
-      [service]="userService"
-      [columns]="componentUser$.tableColumns"
-      [sortBy]="componentUser$.initialSort"
-      [sortDir]="componentUser$.initialSortDir"
-      [getInputs]="componentUser$.getInputs"
+        (rowClick)="rowClick($event)"
+        [service]="userService"
+        [columns]="componentUser$.tableColumns"
+        [sortBy]="componentUser$.initialSort"
+        [sortDir]="componentUser$.initialSortDir"
+        [getInputs]="componentUser$.getInputs"
       />
     </div>
   </div>

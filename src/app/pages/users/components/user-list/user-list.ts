@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { fadeInRight400ms } from '@shared/animations/fade-in-right.animation';
 import { scaleIn400ms } from '@shared/animations/scale-in.animation';
+import { ExportExcel } from '@shared/components/reusables/export-excel/export-excel';
 import { FilterMenuStatesComponent } from '@shared/components/reusables/filter-menu-states/filter-menu-states.component';
 import { GenericButtonComponent } from '@shared/components/reusables/generic-button/generic-button.component';
 import { ListTableComponent } from '@shared/components/reusables/list-table/list-table.component';
@@ -25,6 +26,7 @@ import { componentUserSetting } from './user-list.config';
     FilterMenuStatesComponent,
     SplitButtonComponent,
     GenericButtonComponent,
+    ExportExcel,
   ],
   templateUrl: './user-list.html',
   animations: [scaleIn400ms, fadeInRight400ms],
@@ -120,5 +122,9 @@ export class UserList {
   setGetInputsUser(refresh: boolean) {
     this.componentUser$.filters.refresh = refresh;
     this.formatGetInputs();
+  }
+
+  get getDownloadUrl() {
+    return 'User/Excel';
   }
 }
