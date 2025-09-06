@@ -6,25 +6,25 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import Swal from 'sweetalert2';
 
 @Component({
-  selector: 'app-export-excel',
+  selector: 'app-export-pdf',
   imports: [MatIcon, MatTooltip],
-  templateUrl: './export-excel.html',
+  templateUrl: './export-pdf.html',
 })
-export class ExportExcel {
-  private readonly downloadFileService = inject(DownloadFile);
+export class ExportPdf {
+  private readonly downloadPdfService = inject(DownloadFile);
   private readonly spinner = inject(NgxSpinnerService);
 
   @Input() url: string = '';
   @Input() getInputs: string = '';
   @Input() filename: string = '';
 
-  icCloudDownload = 'cloud_download';
-  infoTooltip = 'Descargar resultados en formato Excel';
+  icCloudDownload = 'picture_as_pdf';
+  infoTooltip = 'Descargar resultados en formato PDF';
 
   download() {
     Swal.fire({
       title: 'Confirmar',
-      text: 'Esta acción descargará los registros en formato .xlsx ignorando la paginación.',
+      text: 'Esta acción descargará los registros en formato .pdf ignorando la paginación.',
       icon: 'warning',
       showCancelButton: true,
       focusCancel: true,
@@ -42,11 +42,13 @@ export class ExportExcel {
 
   executeDownload() {
     this.spinner.show();
-    this.downloadFileService
+    this.downloadPdfService
       .executeDownload(this.url + this.getInputs)
-      .subscribe((excelData: Blob) => {
-        const fileName = this.filename;
-        const blobUrl = URL.createObjectURL(excelData);
+      .subscribe((pdfData: Blob) => {
+        const fileName = this.filename.endsWith('.pdf')
+          ? this.filename
+          : `${this.filename}.pdf`;
+        const blobUrl = URL.createObjectURL(pdfData);
         const downloadLink = document.createElement('a');
         downloadLink.href = blobUrl;
         downloadLink.download = fileName;

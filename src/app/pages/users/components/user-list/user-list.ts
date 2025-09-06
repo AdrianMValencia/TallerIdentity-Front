@@ -16,6 +16,7 @@ import { UserResponse } from '../../models/user-response.interface';
 import { User } from '../../services/user';
 import { UserManagement } from '../user-management/user-management';
 import { componentUserSetting } from './user-list.config';
+import { ExportPdf } from '@shared/components/reusables/export-pdf/export-pdf';
 
 @Component({
   selector: 'app-user-list',
@@ -27,6 +28,7 @@ import { componentUserSetting } from './user-list.config';
     SplitButtonComponent,
     GenericButtonComponent,
     ExportExcel,
+    ExportPdf,
   ],
   templateUrl: './user-list.html',
   animations: [scaleIn400ms, fadeInRight400ms],
@@ -124,7 +126,10 @@ export class UserList {
     this.formatGetInputs();
   }
 
-  get getDownloadUrl() {
+  get getDownloadUrlExcel() {
     return 'User/Excel';
+  }
+  get getDownloadUrlPdf() {
+    return 'User/Pdf';
   }
 }

@@ -24,7 +24,12 @@
           (search)="search($event)"
         />
         <app-export-excel
-          [url]="getDownloadUrl"
+          [url]="getDownloadUrlExcel"
+          [getInputs]="componentUser$.getInputs"
+          [filename]="componentUser$.filename"
+        />
+        <app-export-pdf
+          [url]="getDownloadUrlPdf"
           [getInputs]="componentUser$.getInputs"
           [filename]="componentUser$.filename"
         />

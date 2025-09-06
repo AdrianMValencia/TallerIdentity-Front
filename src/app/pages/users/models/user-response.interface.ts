@@ -11,3 +11,7 @@ export interface UserResponse {
   icEdit: string;
   icDelete: string;
 }
+
+export interface UserByIdResponse {
+  
+}

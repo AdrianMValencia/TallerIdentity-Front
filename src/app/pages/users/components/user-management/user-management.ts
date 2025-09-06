@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
   selector: 'app-user-management',
   imports: [],
   templateUrl: './user-management.html',
-  styleUrl: './user-management.scss',
 })
 export class UserManagement {
   private readonly fb$ = inject(FormBuilder);

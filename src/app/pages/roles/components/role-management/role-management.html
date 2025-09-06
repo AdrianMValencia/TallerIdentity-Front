@@ -1,1 +1,125 @@
-<p>role-management works!</p>
+<div class="bg-am-main-body-custom">
+  <div
+    class="max-w-screen-160 mx-auto h-full flex flex-col px-10 py-6 gap-4 mt-6"
+  >
+    <div class="flex justify-between flex-wrap gap-4">
+      <div class="flex items-center">
+        <mat-icon
+          @scaleIn
+          class="text-2xl text-am-main-blue"
+          fontIcon="manage_accounts"
+        >
+        </mat-icon>
+        <div
+          @fadeInRight
+          class="text-3xl font-medium italic text-am-main-blue-dark ml-2"
+        >
+          Acceso de permisos por rol
+        </div>
+      </div>
+      <div
+        class="flex gap-2 items-center w-full smd:w-fit justify-end flex-wrap"
+      >
+        <div>
+          <button
+            class="flex rounded-2xl h-11 button-filter items-center p-3 justify-center gap-2 text-am-main-blue-dark"
+            (click)="back()"
+          >
+            REGRESAR
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="card h-full rounded-3xl flex-auto">
+      <form class="w-full" [formGroup]="form$">
+        <div class="bg-white rounded-lg p-4 shadow">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+            <gs-text label="Rol" [inputControl]="form$.get('name')" />
+            <gs-text
+              label="Descripción"
+              [inputControl]="form$.get('description')"
+            />
+            <gs-select
+              label="Estado"
+              placeholder="Seleccionar estado"
+              mode="create"
+              [aOptions]="states$"
+              [inputControl]="form$.get('state')"
+            />
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pl-8 pt-4">
+            <span class="text-base text-am-main-blue-dark font-normal"
+              >Menú</span
+            >
+            <span
+              class="text-base col-span-2 text-am-main-blue-dark font-normal"
+            >
+              Permisos
+            </span>
+          </div>
+          <div
+            class="grid grid-cols-1 sm:grid-cols-3 gap-3 pl-8 pt-4 w-full hRol overflow-auto"
+          >
+            <div>
+              @for (item of menuPermissions; track item; let i = $index) {
+              <div>
+                <div class="flex my-3 items-center">
+                  <div
+                    class="bg-am-purple-light rounded-full w-10 h-10 flex items-center justify-center"
+                  >
+                    <mat-icon
+                      class="text-am-main-blue-dark"
+                      [fontIcon]="item.icon"
+                    ></mat-icon>
+                  </div>
+                  <div
+                    [class]="
+                      indexMenu == i
+                        ? 'text-am-main-blue-dark font-bold'
+                        : 'text-am-grey-medium font-normal'
+                    "
+                    class="text-sm ml-4 hover:text-am-main-blue-dark cursor-pointer"
+                    (click)="setIndexMenu(i)"
+                  >
+                    {{ item.menu }}
+                  </div>
+                </div>
+              </div>
+              }
+            </div>
+
+            <div class="col-span-2 w-full">
+              @for (option of permissions; track option; let j = $index) {
+              <div>
+                <div class="w-full">
+                  <app-checkbox
+                    [label]="option.permissionName"
+                    [cssLabel]="['text-sm', 'text-am-bl-dark', 'font-bold']"
+                    [sublabel]="option.permissionDescription"
+                    [positionEnd]="true"
+                    [key]="j"
+                    [check]="option.selected"
+                    (checked)="optionChecked(option)"
+                  />
+                </div>
+              </div>
+              }
+            </div>
+          </div>
+          <div class="flex justify-end">
+            <button
+              color="purple"
+              class="bg-accent text-accent-contrast"
+              mat-button
+              type="submit"
+              (click)="roleSave()"
+            >
+              GUARDAR
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

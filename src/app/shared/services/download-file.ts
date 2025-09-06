@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class DownloadXslx {
+export class DownloadFile {
   private readonly http = inject(HttpClient);
 
   // Método executeDownload() que realiza una solicitud

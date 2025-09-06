@@ -21,6 +21,10 @@ import {
 } from '../../models/role-response.interface';
 import { Role } from '../../services/role';
 import { componentRoleSetting } from '../role-list/role-list.config';
+import {
+  CreateRoleRequest,
+  UpdateRoleRequest,
+} from '../../models/role-request.interface';
 
 @Component({
   selector: 'app-role-management',
@@ -101,5 +105,132 @@ export class RoleManagement {
   setIndexMenu(indexMenu: number) {
     this.indexMenu = indexMenu;
     this.permissions = this.menuPermissions[indexMenu].permissions;
+  }
+
+  back() {
+    this.route.navigate(['roles']);
+  }
+
+  optionChecked(selectedPermissions: PermissionsResponse) {
+    selectedPermissions.selected = !selectedPermissions.selected;
+    this.togglePermissionSelection(selectedPermissions);
+    this.selectedPermissionsList = this.getSelectedPermissions();
+  }
+
+  togglePermissionSelection(permission: PermissionsResponse) {
+    const index = this.selectedPermissions.findIndex(
+      (p) => p.permissionName === permission.permissionName
+    );
+
+    if (index !== -1) {
+      this.selectedPermissions.splice(index, 1);
+    } else {
+      this.selectedPermissions.push(permission);
+    }
+  }
+
+  getSelectedPermissions(): PermissionsResponse[] {
+    return this.selectedPermissions;
+  }
+
+  roleSave(): void {
+    if (this.form$.invalid) {
+      return Object.values(this.form$.controls).forEach((controls) => {
+        controls.markAllAsTouched();
+      });
+    }
+
+    const roleId = this.roleId;
+
+    if (roleId > 0) {
+      this.roleEdit(roleId);
+    } else {
+      this.roleRegister();
+    }
+  }
+
+  roleRegister(): void {
+    const selectedMenusSet = new Set<number>();
+    this.menuPermissions.forEach((menu) => {
+      if (menu.permissions.some((perm) => perm.selected)) {
+        selectedMenusSet.add(menu.menuId);
+        if (menu.fatherId) {
+          selectedMenusSet.add(menu.fatherId);
+        }
+      }
+    });
+
+    const selectedMenus = Array.from(selectedMenusSet).map((menuId) => ({
+      menuId,
+    }));
+
+    const role: CreateRoleRequest = {
+      name: this.form$.value.name,
+      description: this.form$.value.description,
+      state: this.form$.value.state,
+      permissions: this.selectedPermissionsList.map((perm) => {
+        return {
+          permissionId: perm.permissionId,
+          permissionName: perm.permissionName,
+          permissionDescription: perm.permissionDescription,
+        };
+      }),
+      menus: selectedMenus,
+    };
+
+    this.roleService.roleCreate(role).subscribe((resp) => {
+      if (resp.isSuccess) {
+        this.alert.success('Excelente', resp.message);
+        this.route.navigate(['roles']);
+      } else {
+        this.alert.warn('Atención', resp.message);
+      }
+    });
+  }
+
+  roleEdit(roleId: number): void {
+    const allPermissions = this.menuPermissions
+      .reduce(
+        (accumulator, menu: any) => accumulator.concat(menu.permissions),
+        []
+      )
+      .map((permission: PermissionsResponse) => ({
+        permissionId: permission.permissionId,
+        permissionName: permission.permissionName,
+        permissionDescription: permission.permissionDescription,
+        selected: permission.selected,
+      }));
+
+    const selectedMenusSet = new Set<number>();
+    this.menuPermissions.forEach((menu) => {
+      if (menu.permissions.some((perm) => perm.selected)) {
+        selectedMenusSet.add(menu.menuId);
+        if (menu.fatherId) {
+          selectedMenusSet.add(menu.fatherId);
+        }
+      }
+    });
+
+    const selectedMenus = Array.from(selectedMenusSet).map((menuId) => ({
+      menuId,
+    }));
+
+    const role: UpdateRoleRequest = {
+      roleId: roleId,
+      name: this.form$.value.name,
+      description: this.form$.value.description,
+      state: this.form$.value.state,
+      permissions: allPermissions,
+      menus: selectedMenus,
+    };
+
+    this.roleService.roleUpdate(role).subscribe((resp) => {
+      if (resp.isSuccess) {
+        this.alert.success('Excelente', resp.message);
+        this.route.navigate(['roles']);
+      } else {
+        this.alert.warn('Atención', resp.message);
+      }
+    });
   }
 }

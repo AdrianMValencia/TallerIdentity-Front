@@ -14,6 +14,7 @@ import { Actions } from '@shared/models/reusables/split-button.interface';
 import { RoleResponse } from '../../models/role-response.interface';
 import { Role } from '../../services/role';
 import { componentRoleSetting } from './role-list.config';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-role-list',
@@ -45,7 +46,7 @@ export class RoleList {
         this.roleEdit(role);
         break;
       case 'delete':
-        // this.roleDelete(role);
+        this.roleDelete(role);
         break;
     }
   }
@@ -114,5 +115,26 @@ export class RoleList {
   setGetInputsRole(refresh: boolean) {
     this.componentRole$.filters.refresh = refresh;
     this.formatGetInputs();
+  }
+
+  roleDelete(roleData: RoleResponse) {
+    Swal.fire({
+      title: 'Eliminar rol',
+      text: `¿Realmente deseas eliminar el rol ${roleData.name}?`,
+      icon: 'warning',
+      showCancelButton: true,
+      focusCancel: true,
+      confirmButtonColor: '#004A89',
+      cancelButtonColor: '#9c667d',
+      cancelButtonText: 'Cancelar',
+      confirmButtonText: 'Sí, eliminar',
+      width: 430,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.roleService.roleDelete(roleData.roleId).subscribe(() => {
+          this.setGetInputsRole(true);
+        });
+      }
+    });
   }
 }

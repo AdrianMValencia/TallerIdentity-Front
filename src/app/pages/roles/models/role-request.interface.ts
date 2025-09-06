@@ -10,7 +10,7 @@ export interface PermissionRequest {
   permissionId: number;
   permissionName: string;
   permissionDescription: string;
-  selected: boolean;
+  // selected: boolean;
 }
 
 export interface MenuRequest {
